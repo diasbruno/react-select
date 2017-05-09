@@ -40,6 +40,10 @@ const stringOrNode = React.PropTypes.oneOfType([
 
 let instanceId = 1;
 
+export const NEVER_SHOW_CLEAN = 0;
+export const SHOW_CLEAN =  1;
+export const ALWAYS_SHOW_CLEAN = 2;
+
 const Select = React.createClass({
 
 	displayName: 'Select',
@@ -59,7 +63,7 @@ const Select = React.createClass({
 		clearAllText: stringOrNode,                 // title for the "clear" control when multi: true
 		clearRenderer: React.PropTypes.func,        // create clearable x element
 		clearValueText: stringOrNode,               // title for the "clear" control
-		clearable: React.PropTypes.bool,            // should it be possible to reset value
+		clearable: React.PropTypes.number,          // should it be possible to reset value
 		deleteRemoves: React.PropTypes.bool,        // whether backspace removes an item if there is no text input
 		delimiter: React.PropTypes.string,          // delimiter to use to join multiple values for the hidden field value
 		disabled: React.PropTypes.bool,             // whether the Select is disabled or not
@@ -127,7 +131,7 @@ const Select = React.createClass({
 			autosize: true,
 			backspaceRemoves: true,
 			backspaceToRemoveMessage: 'Press backspace to remove {label}',
-			clearable: true,
+			clearable: SHOW_CLEAN,
 			clearAllText: 'Clear all',
 			clearRenderer: defaultClearRenderer,
 			clearValueText: 'Clear value',
@@ -499,7 +503,7 @@ const Select = React.createClass({
 				if (this.state.isOpen) {
 					this.closeMenu();
 					event.stopPropagation();
-				} else if (this.props.clearable && this.props.escapeClearsValue) {
+				} else if (this.props.clearable > NEVER_SHOW_CLEAN && this.props.escapeClearsValue) {
 					this.clearValue(event);
 					event.stopPropagation();
 				}
@@ -905,9 +909,7 @@ const Select = React.createClass({
 	},
 
 	renderClear () {
-		if (!this.props.clearable || (!this.props.value || this.props.value === 0) || (this.props.multi && !this.props.value.length) || this.props.disabled || this.props.isLoading) return;
-		const clear = this.props.clearRenderer();
-
+		if (this.props.clearable == NEVER_SHOW_CLEAN || this.props.clearable == SHOW_CLEAN && !this.props.value || (this.props.multi && !this.props.value.length) || this.props.disabled || this.props.isLoading) return;
 		return (
 			<span className="Select-clear-zone" title={this.props.multi ? this.props.clearAllText : this.props.clearValueText}
 				aria-label={this.props.multi ? this.props.clearAllText : this.props.clearValueText}
