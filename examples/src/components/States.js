@@ -1,6 +1,8 @@
 import React from 'react';
 import Select from 'react-select';
 
+const ALWAYS_SHOW_CLEAN = Select.ALWAYS_SHOW_CLEAN;
+
 const STATES = require('../data/states');
 
 var StatesField = React.createClass({
@@ -21,7 +23,7 @@ var StatesField = React.createClass({
 			disabled: false,
 			searchable: this.props.searchable,
 			selectValue: 'new-south-wales',
-			clearable: true,
+			clearable: ALWAYS_SHOW_CLEAN,
 		};
 	},
 	switchCountry (e) {
