@@ -1,9 +1,7 @@
 import React from 'react';
-import Select from 'react-select';
+import Select, { ALWAYS_SHOW_CLEAN } from 'react-select';
 
 const STATES = require('../data/states');
-
-+const ALWAYS_SHOW_CLEAN = Select.ALWAYS_SHOW_CLEAN;
 
 var StatesField = React.createClass({
 	displayName: 'StatesField',
@@ -23,7 +21,7 @@ var StatesField = React.createClass({
 			disabled: false,
 			searchable: this.props.searchable,
 			selectValue: 'new-south-wales',
-			clearable: SHOW_CLEAN,
+			clearable: ALWAYS_SHOW_CLEAN,
 		};
 	},
 	switchCountry (e) {
@@ -64,10 +62,6 @@ var StatesField = React.createClass({
 					<label className="checkbox" style={{ marginLeft: 10 }}>
 						<input type="checkbox" className="checkbox-control" name="disabled" checked={this.state.disabled} onChange={this.toggleCheckbox}/>
 						<span className="checkbox-label">Disabled</span>
-					</label>
-					<label className="checkbox" style={{ marginLeft: 10 }}>
-						<input type="checkbox" className="checkbox-control" name="clearable" checked={this.state.clearable} onChange={this.toggleCheckbox}/>
-						<span className="checkbox-label">Clearable</span>
 					</label>
 				</div>
 				<div className="checkbox-list">

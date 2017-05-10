@@ -968,7 +968,7 @@ var StatesField = _react2['default'].createClass({
 			disabled: false,
 			searchable: this.props.searchable,
 			selectValue: 'new-south-wales',
-			clearable: true
+			clearable: _reactSelect.ALWAYS_SHOW_CLEAN
 		};
 	},
 	switchCountry: function switchCountry(e) {
@@ -1030,16 +1030,6 @@ var StatesField = _react2['default'].createClass({
 						'span',
 						{ className: 'checkbox-label' },
 						'Disabled'
-					)
-				),
-				_react2['default'].createElement(
-					'label',
-					{ className: 'checkbox', style: { marginLeft: 10 } },
-					_react2['default'].createElement('input', { type: 'checkbox', className: 'checkbox-control', name: 'clearable', checked: this.state.clearable, onChange: this.toggleCheckbox }),
-					_react2['default'].createElement(
-						'span',
-						{ className: 'checkbox-label' },
-						'Clearable'
 					)
 				)
 			),
